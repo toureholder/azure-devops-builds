@@ -1,0 +1,21 @@
+{
+  "name": "run-devops-pipelines",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "ts-node index.ts"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^9.0.0"
+  },
+  "dependencies": {
+    "@types/node": "^14.6.4",
+    "azure-devops-node-api": "^11.0.0",
+    "json-2-csv": "^3.7.6",
+    "typescript": "^4.0.2"
+  }
+}
