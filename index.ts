@@ -44,7 +44,21 @@ async function main() {
       await buildApi.getDefinitions(project.name);
 
     // Filter definitions of web apps
-    definitions.forEach((defintion: BuildDefinitionReference) => {
+    const webAppDefinitions = definitions.filter(
+      (defintion: BuildDefinitionReference) => {
+        const name: String = defintion.name;
+        return (
+          project.name != 'Training' &&
+          project.name != 'POCS' &&
+          (name.endsWith('web CI') ||
+            name.endsWith('web') ||
+            name.endsWith('Web CI') ||
+            name.endsWith('Web'))
+        );
+      }
+    );
+
+    webAppDefinitions.forEach((defintion: BuildDefinitionReference) => {
       const repositoryName = defintion.name.replace(/\sCI$/, '');
 
       if (list.indexOf(repositoryName) > -1) {
