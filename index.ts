@@ -43,22 +43,8 @@ async function main() {
     const definitions: BuildDefinitionReference[] =
       await buildApi.getDefinitions(project.name);
 
-    // Filter definitions of web apps
-    const webAppDefinitions = definitions.filter(
-      (defintion: BuildDefinitionReference) => {
-        const name: String = defintion.name;
-        return (
-          project.name != 'Training' &&
-          project.name != 'POCS' &&
-          (name.endsWith('web CI') ||
-            name.endsWith('web') ||
-            name.endsWith('Web CI') ||
-            name.endsWith('Web'))
-        );
-      }
-    );
-
-    webAppDefinitions.forEach((defintion: BuildDefinitionReference) => {
+    // Try to find a definition for each repository in `list`
+    definitions.forEach((defintion: BuildDefinitionReference) => {
       const repositoryName = defintion.name.replace(/\sCI$/, '');
 
       if (list.indexOf(repositoryName) > -1) {
@@ -81,6 +67,7 @@ async function main() {
     fs.writeFileSync('repositories.csv', csv);
   });
 
+  // Queue builds'
   for (const repo of repos) {
     const build: Build = {
       definition: {
