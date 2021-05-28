@@ -67,18 +67,20 @@ async function main() {
     fs.writeFileSync('repositories.csv', csv);
   });
 
-  // Queue builds'
+  // Queue builds
   for (const repo of repos) {
     const build: Build = {
       definition: {
         id: repo.definitionId,
       },
+      reason: BuildReason.ScheduleForced,
     };
 
     console.log(`Queing build for ${repo.repository}`);
 
     try {
       await buildApi.queueBuild(build, repo.project);
+      console.log(`SUCCESS: Build queued for ${repo.repository}`);
     } catch (error) {
       console.log('error', error);
     }
