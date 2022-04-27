@@ -21,7 +21,7 @@ const list = ['example-repo-web'];
 
 async function main() {
   // Create connection
-  const orgUrl = 'https://dev.azure.com/wizsolucoes';
+  const orgUrl = 'https://dev.azure.com/myorg';
   const token: string = process.env.AZURE_PERSONAL_ACCESS_TOKEN;
   const authHandler = azureDevops.getPersonalAccessTokenHandler(token);
   const connection = new azureDevops.WebApi(orgUrl, authHandler);
